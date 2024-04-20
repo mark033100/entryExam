@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('firstName');
-            $table->string('middleName');
-            $table->string('lastName');
-            $table->string('suffix');
-            $table->date('dateofBirth');
-            $table->string('address');
+            $table->string('firstName',15);
+            $table->string('middleName',15);
+            $table->string('lastName',15);
+            $table->string('suffix',5);
+            $table->string('dateofBirth',15);
+            $table->string('address',100);
             $table->timestamps();
         });
     }

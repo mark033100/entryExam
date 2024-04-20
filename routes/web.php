@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ControllerPatient;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/patient', [ControllerPatient::class, 'index'])->name('patient.index');
+
+//Patients
+//Create
+Route::get('/patient/create', [ControllerPatient::class, 'create'])->name('patient.create');
+Route::post('/patient', [ControllerPatient::class, 'store'])->name('patient.store'); 
