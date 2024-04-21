@@ -10,7 +10,12 @@ use App\Models\Patient;
 class ControllerPatient extends Controller
 {
     public function index(){
-        return view('patients.index');
+        
+        $patients = Patient::all();
+
+
+
+        return view('patients.index',['patients' => $patients]);
     }
 
     public function create(){
@@ -41,5 +46,24 @@ class ControllerPatient extends Controller
 
         return redirect(route('patient.index'));
         
+    }
+
+    public function edit(Patient $patient){
+        return view('patients.edit',['patient'=> $patient]);
+    }
+
+    public function update(Patient $patient, Request $request){
+        $data = $request->validate([
+            'firstName' => 'required',
+            'middleName' => 'nullable',
+            'lastName' => 'required',
+            'suffix' => 'nullable',
+            'dateofBirth' => 'required',
+            'address' => 'required',
+        ]);
+
+        $patient->update($data);
+
+        return redirect(route('patient.index'))->with('success','Patient Updated Successfully');
     }
 }
