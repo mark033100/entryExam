@@ -32,6 +32,10 @@ Route::get('/admission', [ControllerAdmission::class, 'index'])->name('admission
 Route::get('/patient/create', [ControllerPatient::class, 'create'])->name('patient.create');
 Route::post('/patient', [ControllerPatient::class, 'store'])->name('patient.store'); 
 
+//Admit
+Route::get('/patient/{patient}/admit', [ControllerPatient::class, 'admit'])->name('patient.admit'); 
+Route::put('/patient/{patient}/confirmAdmit', [ControllerPatient::class, 'confirmAdmit'])->name('patient.confirmAdmit'); 
+
 //Update
 Route::get('/patient/{patient}/edit', [ControllerPatient::class, 'edit'])->name('patient.edit'); 
 Route::put('/patient/{patient}/update', [ControllerPatient::class, 'update'])->name('patient.update'); 
@@ -50,6 +54,10 @@ Route::post('/admission', [ControllerAdmission::class, 'store'])->name('admissio
 //Update
 Route::get('/admission/{admission}/edit', [ControllerAdmission::class, 'edit'])->name('admission.edit'); 
 Route::put('/admission/{admission}/update', [ControllerAdmission::class, 'update'])->name('admission.update'); 
+
+//Discharge
+Route::get('/admission/{admission}/discharge', [ControllerAdmission::class, 'discharge'])->name('admission.discharge'); 
+Route::put('/admission/{admission}/confirmDischarge', [ControllerAdmission::class, 'confirmDischarge'])->name('admission.confirmDischarge');
 
 //Delete
 Route::delete('/admission/{admission}/delete', [ControllerAdmission::class, 'delete'])->name('admission.delete');

@@ -27,16 +27,19 @@
             <input type="text" name="Ward" id="Ward" placeholder="Add Ward"></input> 
         </div>
         <div>
-            <label>Patient ID</label> 
-            <input type="text" name="patientID" id="patientID" placeholder="Add Patient ID"></input> 
+            <!--<label>Patient ID</label> 
+            <input type="text" name="patientID" id="patientID" placeholder="Add Patient ID"></input> -->
+            <label>Patient</label>
+            <select name="patientID"> 
+                @foreach ($patients as $patient) 
+                <option value="{{ $patient->id }}">{{ $patient->firstName }} {{ $patient->lastName }}</option> 
+                @endforeach 
+            </select>
+
         </div>
         <div>
             <label>Admission Date</label>
-            <input type="date" name="admissionDate" id="admissionDate" ></input> 
-        </div>
-        <div>
-            <label>Discharge Date</label>
-            <input type="date" name="dischargeDate" id="dischargeDate" ></input> 
+            <input type="datetime-local" name="admissionDate" id="admissionDate" ></input> 
         </div>
         <div>
             <input type="submit" value="Add Admission"/>

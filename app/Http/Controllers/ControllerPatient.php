@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Patient;
+use App\Models\Admission;
 
 
 class ControllerPatient extends Controller
@@ -12,7 +13,6 @@ class ControllerPatient extends Controller
     public function index(){
         
         $patients = Patient::all();
-
         return view('patients.index',['patients' => $patients]);
 
     }
@@ -48,6 +48,28 @@ class ControllerPatient extends Controller
         
     }
 
+    //Patient Admit
+    public function admit(Patient $patient){
+        return view('patients.admit',['patient'=> $patient]);
+    }
+
+    public function confirmAdmit(Patient $patient, Request $request){
+        $data = $request->validate([
+            'Ward' => 'required',
+            'patientID' => 'required',
+            'admissionDate' => 'required',
+            'dischargeDate' => 'nullable',
+        ]);
+
+        $admission = new Admission();
+        $admission->Ward = $data['Ward'];
+        $admission->patientID = $data['patientID'];
+        $admission->admissionDate = $data['admissionDate'];
+        $admission->dischargeDate = null;
+
+        $admission->save();
+        return redirect(route('patient.index'))->with('success','Patient Admitted Successfully');
+    }
 
     //Patient Update
     public function edit(Patient $patient){
@@ -60,7 +82,7 @@ class ControllerPatient extends Controller
             'lastName' => 'required',
             'suffix' => 'nullable',
             'dateofBirth' => 'required',
-            'address' => 'required',
+            'address' => 'required'
         ]);
 
         $patient->update($data);

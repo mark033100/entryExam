@@ -17,7 +17,9 @@
         </ul>
     </div>
     @endif
+
     <a href="{{route('patient.index')}}">Home</a>
+
     <form method="POST" action="{{route('patient.update', ['patient' => $patient])}}">
         @csrf
         @method('put')

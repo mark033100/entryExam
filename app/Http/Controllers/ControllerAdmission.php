@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admission;
+use App\Models\Patient;
 
 class ControllerAdmission extends Controller
 {
@@ -12,10 +13,12 @@ class ControllerAdmission extends Controller
         $admission = Admission::all();
         return view('admissions.index',['admissions' => $admission]);
 
+
     }
 
     public function create(){
-        return view('admissions.create');
+        $patients = Patient::all();
+        return view('admissions.create',['patients' => $patients]);
     }
 
     public function store(Request $request){
@@ -31,7 +34,6 @@ class ControllerAdmission extends Controller
         $admission->Ward = $data['Ward'];
         $admission->patientID = $data['patientID'];
         $admission->admissionDate = $data['admissionDate'];
-        $admission->dischargeDate = $data['dischargeDate'];
 
         $admission->save();
 
@@ -58,6 +60,24 @@ class ControllerAdmission extends Controller
     public function delete(Admission $admission){
         $admission->delete();
         return redirect(route('admission.index'))->with('success','Admission Deleted Successfully');
+    }
+
+    //Patient Discharge
+    public function discharge(Admission $admission){
+        return view('admissions.discharge',['admission'=> $admission]);
+    }
+
+    public function confirmDischarge(Admission $admission, Request $request){
+        $data = $request->validate([
+            'dischargeDate' => 'required',
+            'patientID' => 'required',
+            'Ward' => 'required',
+            'admissionDate' => 'required',
+        ]);
+
+        $admission->update($data);
+
+        return redirect(route('admission.index'))->with('success','Patient Discharged Successfully');
     }
 
 }

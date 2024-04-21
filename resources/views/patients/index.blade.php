@@ -34,6 +34,7 @@
                 <th>Suffix</th>
                 <th>Date of Birth</th>
                 <th>Address</th>
+                <th>Admit to a Ward</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -46,6 +47,9 @@
                     <td>{{$patient->suffix}}</td>
                     <td>{{$patient->dateofBirth}}</td>
                     <td>{{$patient->address}}</td>
+                    <td>
+                        <a href="{{route('patient.admit', ['patient' => $patient])}}">Admit</a>
+                    </td>
                     <td>
                         <a href="{{route('patient.edit', ['patient' => $patient])}}">Edit</a>
                     </td>
