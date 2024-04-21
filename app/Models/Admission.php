@@ -8,9 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Admission extends Model
 {
     use HasFactory;
+    
+    protected $table = 'admission';
 
     protected $fillable = [
-        'patienID',
+        'patientID',
         'Ward',
         'admissionDate',
         'dischargeDate'

@@ -13,10 +13,10 @@ class ControllerPatient extends Controller
         
         $patients = Patient::all();
 
-
-
         return view('patients.index',['patients' => $patients]);
+
     }
+
 
     public function create(){
         return view('patients.create');
@@ -48,10 +48,11 @@ class ControllerPatient extends Controller
         
     }
 
+
+    //Patient Update
     public function edit(Patient $patient){
         return view('patients.edit',['patient'=> $patient]);
     }
-
     public function update(Patient $patient, Request $request){
         $data = $request->validate([
             'firstName' => 'required',
@@ -63,7 +64,12 @@ class ControllerPatient extends Controller
         ]);
 
         $patient->update($data);
-
         return redirect(route('patient.index'))->with('success','Patient Updated Successfully');
+    }
+
+    //Patient Delete
+    public function delete(Patient $patient){
+        $patient->delete();
+        return redirect(route('patient.index'))->with('success','Patient Deleted Successfully');
     }
 }

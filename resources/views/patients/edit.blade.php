@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Add a Patient</h1>
+    <h1>Update a Patient</h1>
 
     @if($errors->any())
     <div class="alert alert-danger">
@@ -18,35 +18,35 @@
     </div>
     @endif
     <a href="{{route('patient.index')}}">Home</a>
-    <form method="POST" action="{{route('patient.store')}}">
+    <form method="POST" action="{{route('patient.update', ['patient' => $patient])}}">
         @csrf
-        @method('post')
+        @method('put')
         <div>
             <label>First Name</label>
-            <input type="text" name="firstName" id="fname" placeholder="Add First name"></input> 
+            <input type="text" name="firstName" id="fname" value="{{$patient->firstName}}"></input> 
         </div>
         <div>
             <label>Middle Name</label> 
-            <input type="text" name="middleName" id="mname" placeholder="Add Middle name"></input> 
+            <input type="text" name="middleName" id="mname" value="{{$patient->middleName}}"></input> 
         </div>
         <div>
             <label>Last Name</label>
-            <input type="text" name="lastName" id="lname" placeholder="Add Last name"></input> 
+            <input type="text" name="lastName" id="lname" value="{{$patient->lastName}}"></input> 
         </div>
         <div>
             <label>Suffix</label>
-            <input type="text" name="suffix" id="suffix" placeholder="Add Suffix"></input> 
+            <input type="text" name="suffix" id="suffix" value="{{$patient->suffix}}"></input> 
         </div>
         <div>
             <label>Date of birth</label>
-            <input type="date" name="dateofBirth" id="dob" placeholder="Add Birthdate"></input> 
+            <input type="date" name="dateofBirth" id="dob" value="{{$patient->dateofBirth}}"></input> 
         </div>
         <div>
             <label>Address</label>
-            <input type="text" name="address" id="address" placeholder="Add Address"></input> 
+            <input type="text" name="address" id="address" value="{{$patient->address}}"></input> 
         </div>
         <div>
-            <input type="submit" value="Add New Patient"/>
+            <input type="submit" value="Update Patient"/>
         </div>
 
     </form>

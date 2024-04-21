@@ -17,4 +17,5 @@ class Patient extends Model
         'dateofBirth',
         'address'
     ];
+
 }
